@@ -1,0 +1,12 @@
+def dep_versions = [:]
+
+dep_versions.kotlin = "1.7.0"
+dep_versions.lifecycle_version = "2.6.1"
+
+dep_versions.hilt = "2.45"
+dep_versions.retrofit = "2.9.0"
+dep_versions.compose = "1.4.0"
+dep_versions.room = "2.5.1"
+dep_versions.navigation = "2.5.3"
+
+ext.dep_versions = dep_versions
