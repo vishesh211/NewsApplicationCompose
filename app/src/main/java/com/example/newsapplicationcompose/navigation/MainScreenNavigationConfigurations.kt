@@ -1,16 +1,23 @@
 package com.example.newsapplicationcompose.navigation
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.example.newsapplicationcompose.presentation.components.NewsScaffold
 import com.example.newsapplicationcompose.ui.theme.NewsApplicationComposeTheme
 
@@ -45,8 +52,11 @@ fun NewsBottomBar(
     val currentSection = tabs.first { it.route == currentRoute }
 
     NewsSurface(
+        color = color,
+        contentColor = contentColor
+    ) {
 
-    )
+    }
 }
 
 @Composable
@@ -59,7 +69,16 @@ fun NewsSurface(
     elevation: Dp = 0.dp,
     content: @Composable () -> Unit
 ) {
-    TODO("Not yet implemented")
+    Box(
+        modifier = Modifier
+            .shadow(elevation = elevation, shape = shape, clip = false)
+            .zIndex(elevation.value)
+            .then(if (border != null) Modifier.border(border, shape) else Modifier)
+            .background(color = color, shape = shape)
+            .clip(shape)
+    ) {
+        CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
