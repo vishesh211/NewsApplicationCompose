@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import com.example.newsapplicationcompose.R
 
-sealed class BottomNavigationScreens(val route: String, @StringRes val title: Int, val icon: Int) {
-    object BreakingNewsScreen: BottomNavigationScreens("main/local", R.string.breaking_news, R.drawable.baseline_library_books_24)
-    object BookMarksScreen: BottomNavigationScreens("main/global", R.string.breaking_news, R.drawable.baseline_language_24)
-    object SearchScreen: BottomNavigationScreens("main/search", R.string.breaking_news, R.drawable.baseline_search_24)
+sealed class BottomNavigationScreens(val route: String, @StringRes val title: Int, val icon: Int, val order: Int) {
+    object BreakingNewsScreen: BottomNavigationScreens("main/local", R.string.breaking_news, R.drawable.baseline_library_books_24, 0)
+    object BookMarksScreen: BottomNavigationScreens("main/global", R.string.breaking_news, R.drawable.baseline_language_24, 1)
+    object SearchScreen: BottomNavigationScreens("main/search", R.string.breaking_news, R.drawable.baseline_search_24, 2)
 }
