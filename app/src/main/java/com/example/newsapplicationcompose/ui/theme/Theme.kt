@@ -1,10 +1,8 @@
 package com.example.newsapplicationcompose.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 
@@ -45,10 +43,17 @@ fun NewsApplicationComposeTheme(
 
     ProvidesNewsApplicationComposeTheme(colors) {
         MaterialTheme(
-            colorScheme = colors,
+            colorScheme = debugColors(darkTheme),
             typography = Typography,
             shapes = Shapes,
-            content = content
+            content = content/* Other default colors to override
+    background = Color.White,
+    surface = Color.White,
+    onPrimary = Color.White,
+    onSecondary = Color.Black,
+    onBackground = Color.Black,
+    onSurface = Color.Black,
+    */
         )
     }
 }
@@ -56,6 +61,42 @@ fun NewsApplicationComposeTheme(
 private val LocalNewsComposeColors = staticCompositionLocalOf<NewsComposeColors> {
     error("No NewsComposeColors Provided.")
 }
+
+fun debugColors(
+    darkTheme: Boolean,
+    debugColor: Color = Color.Magenta
+) = ColorScheme(
+    primary = debugColor,
+    secondary = debugColor,
+    background = debugColor,
+    surface = debugColor,
+    error = debugColor,
+    onPrimary = debugColor,
+    onSecondary = debugColor,
+    onBackground = debugColor,
+    onSurface = debugColor,
+    onError = debugColor,
+    errorContainer = debugColor,
+    inverseOnSurface = debugColor,
+    inversePrimary = debugColor,
+    inverseSurface = debugColor,
+    onErrorContainer = debugColor,
+    onPrimaryContainer = debugColor,
+    onSecondaryContainer = debugColor,
+    onSurfaceVariant = debugColor,
+    onTertiary = debugColor,
+    onTertiaryContainer = debugColor,
+    outline = debugColor,
+    outlineVariant = debugColor,
+    primaryContainer = debugColor,
+    scrim = debugColor,
+    secondaryContainer = debugColor,
+    surfaceTint = debugColor,
+    surfaceVariant = debugColor,
+    tertiary = debugColor,
+    tertiaryContainer = debugColor
+)
+
 
 @Composable
 fun ProvidesNewsApplicationComposeTheme(
