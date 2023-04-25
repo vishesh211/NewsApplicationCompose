@@ -49,6 +49,9 @@ fun MainScreenNavigationConfigurations() {
                     navigateToRoute = appState::navigationToBottomBarRoute
                 )
             },
+            snackbarHost = {
+
+            }
         )
     }
 }
