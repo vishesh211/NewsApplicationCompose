@@ -16,6 +16,7 @@ private val DarkColorPalette = NewsComposeColors(
     onSecondary = Color.Black,
     onBackground = Color.Black,
     onSurface = Color.Black,
+    iconInteractive = Violet700
 )
 
 private val LightColorPalette = NewsComposeColors(
@@ -28,6 +29,7 @@ private val LightColorPalette = NewsComposeColors(
     onSecondary = Color.Black,
     onBackground = Color.Black,
     onSurface = Color.Black,
+    iconInteractive = Violet700
 )
 
 @Composable
@@ -41,7 +43,7 @@ fun NewsApplicationComposeTheme(
         LightColorPalette
     }
 
-    ProvidesNewsApplicationComposeTheme(colors) {
+    ProvidesNewsApplicationColors(colors) {
         MaterialTheme(
             colorScheme = debugColors(darkTheme),
             typography = Typography,
@@ -56,6 +58,12 @@ fun NewsApplicationComposeTheme(
     */
         )
     }
+}
+
+object NewsApplicationComposeTheme {
+    val colors: NewsComposeColors
+        @Composable
+        get() = LocalNewsComposeColors.current
 }
 
 private val LocalNewsComposeColors = staticCompositionLocalOf<NewsComposeColors> {
@@ -99,7 +107,7 @@ fun debugColors(
 
 
 @Composable
-fun ProvidesNewsApplicationComposeTheme(
+fun ProvidesNewsApplicationColors(
     colors: NewsComposeColors,
     content: @Composable () -> Unit
 ) {
@@ -120,6 +128,7 @@ class NewsComposeColors(
     onBackground: Color,
     surface: Color,
     onSurface: Color,
+    iconInteractive: Color
 ) {
     var primary by mutableStateOf(primary, structuralEqualityPolicy())
         private set
@@ -139,6 +148,8 @@ class NewsComposeColors(
         private set
     var onSurface by mutableStateOf(onSurface, structuralEqualityPolicy())
         private set
+    var iconInteractive by mutableStateOf(iconInteractive, structuralEqualityPolicy())
+        private set
 
     fun copy(
         primary: Color = this.primary,
@@ -150,7 +161,8 @@ class NewsComposeColors(
         onBackground: Color = this.onBackground,
         surface: Color = this.surface,
         onSurface: Color = this.onSurface,
-        ): NewsComposeColors =
+        iconInteractive: Color = this.iconInteractive
+    ): NewsComposeColors =
         NewsComposeColors(
             primary = primary,
             onPrimary = onPrimary,
@@ -161,6 +173,7 @@ class NewsComposeColors(
             onBackground = onBackground,
             surface = surface,
             onSurface = onSurface,
+            iconInteractive = iconInteractive
         )
 
     fun update(other: NewsComposeColors) {
@@ -173,5 +186,6 @@ class NewsComposeColors(
         onBackground = other.onBackground
         surface = other.surface
         onSurface = other.onSurface
+        iconInteractive = other.iconInteractive
     }
 }
