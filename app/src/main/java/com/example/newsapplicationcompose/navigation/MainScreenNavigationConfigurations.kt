@@ -31,20 +31,24 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenNavigationConfigurations() {
-    NewsScaffold(
-        topBar = {
-            NewsTopBar(
-                title = {
-                    Text(text = "NewsApp")
-                }
-            )
-        },
-        bottomBar = {
-            NewsBottomBar(
-            )
-        }
+    NewsApplicationComposeTheme {
+        NewsScaffold(
+            topBar = {
+                NewsTopBar(
+                    title = {
+                        Text(text = "NewsApp")
+                    }
+                )
+            },
+            bottomBar = {
+                NewsBottomBar(
+                    tabs = bottomNavigationItems,
+                    currentRoute =
+                )
+            }
 
-    )
+        )
+    }
 }
 
 @Composable
@@ -151,8 +155,8 @@ fun NewsBottomNavLayout(
 
         layout(
             width = constraints.maxWidth,
-            height = itemPlaceables.maxByOrNull { it.height }?.height?: 0
-        ){
+            height = itemPlaceables.maxByOrNull { it.height }?.height ?: 0
+        ) {
             val indicatorLeft = indicatorIndex.value * unselectedWidth
             indicatorPlaceable.placeRelative(x = indicatorLeft.toInt(), y = 0)
             var x = 0
@@ -214,3 +218,8 @@ fun lerp(start: Int, stop: Int, fraction: Float): Int {
 
 private val BottomNavIndicatorShape: Shape = RoundedCornerShape(50)
 private val BottomNavigationItemPadding = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+private val bottomNavigationItems = arrayOf(
+    BottomNavigationScreens.BookMarksScreen,
+    BottomNavigationScreens.SearchScreen,
+    BottomNavigationScreens.BreakingNewsScreen
+)
