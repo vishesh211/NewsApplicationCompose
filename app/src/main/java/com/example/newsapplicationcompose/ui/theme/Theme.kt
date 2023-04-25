@@ -1,10 +1,10 @@
 package com.example.newsapplicationcompose.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 
@@ -50,18 +50,23 @@ fun NewsApplicationComposeTheme(
     }
 }
 
+private val LocalNewsComposeColors = staticCompositionLocalOf<NewsComposeColors> {
+    error("No NewsComposeColors Provided.")
+}
+
 @Composable
 fun ProvidesNewsApplicationComposeTheme(
-    colors: NewsComposeColorScheme,
+    colors: NewsComposeColors,
     content: @Composable () -> Unit
 ) {
     val colorsPalette = remember {
         colors.copy()
     }
-    colorsPalette.copy()
+    colorsPalette.update(colors)
+    CompositionLocalProvider(LocalNewsComposeColors provides colorsPalette, content = content)
 }
 
-class NewsComposeColorScheme(
+class NewsComposeColors(
     primary: Color,
     onPrimary: Color,
     primaryContainer: Color,
@@ -181,8 +186,8 @@ class NewsComposeColorScheme(
         outline: Color = this.outline,
         outlineVariant: Color = this.outlineVariant,
         scrim: Color = this.scrim,
-    ): NewsComposeColorScheme =
-        NewsComposeColorScheme(
+    ): NewsComposeColors =
+        NewsComposeColors(
             primary = primary,
             onPrimary = onPrimary,
             primaryContainer = primaryContainer,
@@ -214,7 +219,7 @@ class NewsComposeColorScheme(
             scrim = scrim,
         )
 
-    fun update(other: NewsComposeColorScheme) {
+    fun update(other: NewsComposeColors) {
         primary = other.primary
         onPrimary = other.onPrimary
         primaryContainer = other.primaryContainer
