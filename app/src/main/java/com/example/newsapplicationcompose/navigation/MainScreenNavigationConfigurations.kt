@@ -7,6 +7,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -22,9 +23,9 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.zIndex
 import com.example.newsapplicationcompose.presentation.components.NewsScaffold
+import com.example.newsapplicationcompose.ui.theme.NewsApplicationComposeTheme
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,8 +66,32 @@ fun NewsBottomBar(
             stiffness = 800f,
             dampingRatio = 0.8f
         )
-        NewsBottomNavLayout()
+        NewsBottomNavLayout(
+            selectedIndex = currentSection.order,
+            itemCount = routes.size,
+            animSpec = springSpec,
+            indicator = {
+
+            },
+            modifier = Modifier.navigationBarsPadding()
+        ) {
+
+        }
     }
+}
+
+@Composable
+private fun NewsBottomNavIndicator(
+    strokeWidth: Dp = 2.dp,
+    color: Color = NewsApplicationComposeTheme.colors.iconInteractive,
+    shape: Shape = BottomNavIndicatorShape
+) {
+    Spacer(
+        modifier = Modifier
+            .fillMaxSize()
+            .then(BottomNavigationItemPadding)
+            .border(strokeWidth, color, shape)
+    )
 }
 
 @Composable
@@ -186,3 +211,6 @@ fun NewsTopBar(
 fun lerp(start: Int, stop: Int, fraction: Float): Int {
     return start + ((stop - start) * fraction.toDouble()).roundToInt()
 }
+
+private val BottomNavIndicatorShape: Shape = RoundedCornerShape(50)
+private val BottomNavigationItemPadding = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
