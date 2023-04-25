@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.newsapplicationcompose.presentation.components.NewsScaffold
+import com.example.newsapplicationcompose.presentation.rememberNewsAppState
 import com.example.newsapplicationcompose.ui.theme.NewsApplicationComposeTheme
 import kotlin.math.roundToInt
 
@@ -32,6 +33,7 @@ import kotlin.math.roundToInt
 @Composable
 fun MainScreenNavigationConfigurations() {
     NewsApplicationComposeTheme {
+        val appState = rememberNewsAppState()
         NewsScaffold(
             topBar = {
                 NewsTopBar(
@@ -43,10 +45,10 @@ fun MainScreenNavigationConfigurations() {
             bottomBar = {
                 NewsBottomBar(
                     tabs = bottomNavigationItems,
-                    currentRoute =
+                    currentRoute = appState.currentRoute!!,
+                    navigateToRoute = appState::navigationToBottomBarRoute
                 )
-            }
-
+            },
         )
     }
 }
