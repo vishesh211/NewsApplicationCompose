@@ -20,19 +20,16 @@ private val DarkColorPalette = NewsComposeColors(
     onSurface = Color.Black,
 )
 
-private val LightColorPalette = lightColorScheme(
+private val LightColorPalette = NewsComposeColors(
     primary = Violet500,
     primaryContainer = Violet700,
-    secondary = White
-
-    /* Other default colors to override
+    secondary = White,
     background = Color.White,
     surface = Color.White,
     onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,
     onSurface = Color.Black,
-    */
 )
 
 @Composable
