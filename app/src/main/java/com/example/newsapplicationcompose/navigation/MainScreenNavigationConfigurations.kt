@@ -34,6 +34,7 @@ import kotlin.math.roundToInt
 fun MainScreenNavigationConfigurations() {
     NewsApplicationComposeTheme {
         val appState = rememberNewsAppState()
+        val snackbarHostState = remember{ SnackbarHostState() }
         NewsScaffold(
             topBar = {
                 NewsTopBar(
@@ -50,7 +51,11 @@ fun MainScreenNavigationConfigurations() {
                 )
             },
             snackbarHost = {
-
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                    modifier = Modifier.systemBarsPadding(),
+                    snackbar = { snackbarData ->  }
+                )
             }
         )
     }
@@ -214,6 +219,31 @@ fun NewsTopBar(
         windowInsets = windowInsets,
         colors = colors,
         scrollBehavior = scrollBehavior
+    )
+}
+
+@Composable
+fun NewsSnackBar(
+    snackbarData: SnackbarData,
+    modifier: Modifier = Modifier,
+    actionOnNewLine: Boolean = false,
+    shape: Shape = MaterialTheme.shapes.small,
+    containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
+    contentColor: Color = MaterialTheme.colorScheme.onBackground,
+    actionColor: Color = MaterialTheme.colorScheme.onBackground,
+    actionContentColor: Color = MaterialTheme.colorScheme.onBackground,
+    dismissActionContentColor: Color = MaterialTheme.colorScheme.primary,
+) {
+    Snackbar(
+        snackbarData = snackbarData,
+        modifier = modifier,
+        actionOnNewLine = actionOnNewLine,
+        shape = shape,
+        containerColor = containerColor,
+        contentColor = contentColor,
+        actionColor = actionColor,
+        actionContentColor = actionContentColor,
+        dismissActionContentColor = dismissActionContentColor
     )
 }
 
