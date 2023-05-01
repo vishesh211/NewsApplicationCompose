@@ -24,6 +24,10 @@ import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.compose.NavHost
+import androidx.navigation.navigation
 import com.example.newsapplicationcompose.presentation.components.NewsScaffold
 import com.example.newsapplicationcompose.presentation.rememberNewsAppState
 import com.example.newsapplicationcompose.ui.theme.NewsApplicationComposeTheme
@@ -54,10 +58,30 @@ fun MainScreenNavigationConfigurations() {
                 SnackbarHost(
                     hostState = snackbarHostState,
                     modifier = Modifier.systemBarsPadding(),
-                    snackbar = { snackbarData ->  }
+                    snackbar = { snackbarData ->  NewsSnackBar(snackbarData = snackbarData) }
                 )
             }
-        )
+        ) { innerPaddingModifier ->
+            NavHost(
+                navController = appState.navController,
+                startDestination = BottomNavigationScreens.BreakingNewsScreen.route,
+                modifier = Modifier.padding(innerPaddingModifier)
+            ) {
+                newsNavGraph()
+            }
+        }
+    }
+}
+
+private fun NavGraphBuilder.newsNavGraph(
+    onNewsSelected: (Long, NavBackStackEntry) -> Unit,
+    upPress: () -> Unit
+) {
+    navigation(
+        route = MainDestinations.HOME_ROUTE,
+        startDestination = BottomNavigationScreens.BreakingNewsScreen.route
+    ) {
+
     }
 }
 
@@ -258,3 +282,7 @@ private val bottomNavigationItems = arrayOf(
     BottomNavigationScreens.SearchScreen,
     BottomNavigationScreens.BreakingNewsScreen
 )
+
+object MainDestinations {
+    const val HOME_ROUTE = "home"
+}
