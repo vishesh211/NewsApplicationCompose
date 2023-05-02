@@ -1,35 +1,15 @@
 package com.example.newsapplicationcompose.navigation
 
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.SpringSpec
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.NavHost
-import androidx.navigation.navigation
 import com.example.newsapplicationcompose.presentation.components.NewsScaffold
 import com.example.newsapplicationcompose.presentation.rememberNewsAppState
 import com.example.newsapplicationcompose.ui.theme.NewsApplicationComposeTheme
@@ -40,7 +20,6 @@ import kotlin.math.roundToInt
 fun MainScreenNavigationConfigurations() {
     NewsApplicationComposeTheme {
         val appState = rememberNewsAppState()
-        val snackbarHostState = remember{ SnackbarHostState() }
         NewsScaffold(
             topBar = {
                 NewsTopBar(
@@ -57,28 +36,12 @@ fun MainScreenNavigationConfigurations() {
                 )
             }
         ) { innerPaddingModifier ->
-            NavHost(
-                navController = appState.navController,
-                startDestination = BottomNavigationScreens.BreakingNewsScreen.route,
-                modifier = Modifier.padding(innerPaddingModifier)
-            ) {
-                newsNavGraph(
-                    onNewsSelected = appState::na
-                )
-            }
+            NewsNavGraph(
+                modifier = Modifier.padding(innerPaddingModifier),
+                navHostController = appState.navController,
+                startDestination = BottomNavigationScreens.BreakingNewsScreen.route
+            )
         }
-    }
-}
-
-private fun NavGraphBuilder.newsNavGraph(
-    onNewsSelected: (Long, NavBackStackEntry) -> Unit,
-    upPress: () -> Unit
-) {
-    navigation(
-        route = MainDestinations.HOME_ROUTE,
-        startDestination = BottomNavigationScreens.BreakingNewsScreen.route
-    ) {
-
     }
 }
 
