@@ -55,13 +55,6 @@ fun MainScreenNavigationConfigurations() {
                     currentRoute = appState.currentRoute!!,
                     navigateToRoute = appState::navigationToBottomBarRoute
                 )
-            },
-            snackbarHost = {
-                SnackbarHost(
-                    hostState = snackbarHostState,
-                    modifier = Modifier.systemBarsPadding(),
-                    snackbar = { snackbarData ->  NewsSnackBar(snackbarData = snackbarData) }
-                )
             }
         ) { innerPaddingModifier ->
             NavHost(
