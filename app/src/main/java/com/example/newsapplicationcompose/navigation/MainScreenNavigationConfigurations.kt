@@ -21,6 +21,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -89,13 +91,23 @@ private fun NavGraphBuilder.newsNavGraph(
 
 @Composable
 fun NewsBottomBar(
-    tabs: Array<BottomNavigationScreens>,
+    tabs: List<BottomNavigationScreens>,
     currentRoute: String,
     navigateToRoute: (String) -> Unit,
     color: Color = MaterialTheme.colorScheme.primaryContainer,
     contentColor: Color = MaterialTheme.colorScheme.primary
 ) {
-
+    NavigationBar {
+        tabs.forEach { screen ->
+            NavigationBarItem(
+                selected = currentRoute == screen.route,
+                onClick = { navigateToRoute },
+                icon = { Icon(painter = painterResource(id = screen.icon), contentDescription = null) },
+                label = { Text(text = stringResource(id = screen.title))},
+                alwaysShowLabel = false
+            )
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -126,7 +138,7 @@ fun lerp(start: Int, stop: Int, fraction: Float): Int {
 
 private val BottomNavIndicatorShape: Shape = RoundedCornerShape(50)
 private val BottomNavigationItemPadding = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-private val bottomNavigationItems = arrayOf(
+private val bottomNavigationItems = listOf(
     BottomNavigationScreens.BookMarksScreen,
     BottomNavigationScreens.SearchScreen,
     BottomNavigationScreens.BreakingNewsScreen
