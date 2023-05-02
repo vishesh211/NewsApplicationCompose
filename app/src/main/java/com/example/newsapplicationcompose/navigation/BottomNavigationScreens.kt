@@ -12,6 +12,7 @@ import com.example.newsapplicationcompose.R
 
 sealed class BottomNavigationScreens(val route: String, @StringRes val title: Int, val icon: Int, val order: Int) {
     object BreakingNewsScreen: BottomNavigationScreens("main/local", R.string.breaking_news, R.drawable.baseline_library_books_24, 0)
-    object BookMarksScreen: BottomNavigationScreens("main/global", R.string.breaking_news, R.drawable.baseline_language_24, 1)
-    object SearchScreen: BottomNavigationScreens("main/search", R.string.breaking_news, R.drawable.baseline_search_24, 2)
+    object GlobalNewsScreen: BottomNavigationScreens("main/global", R.string.global_news, R.drawable.baseline_language_24, 1)
+    object SearchScreen: BottomNavigationScreens("main/search", R.string.search_screen, R.drawable.baseline_search_24, 2)
+    object BookMarksScreen: BottomNavigationScreens("main/bookmarks", R.string.bookmarks_screen, R.drawable.baseline_bookmarks_24, 2)
 }
