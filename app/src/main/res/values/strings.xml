@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">NewsApplicationCompose</string>
-    <string name="breaking_news">Breaking News</string>
-    <string name="bookmarks">Bookmarks</string>
+    <string name="breaking_news">News</string>
+    <string name="global_news">Global</string>
+    <string name="search_screen">Search</string>
+    <string name="bookmarks_screen">Bookmarks</string>
     <string name="search">Search</string>
 </resources>
