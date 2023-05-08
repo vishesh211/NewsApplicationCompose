@@ -13,11 +13,12 @@ import androidx.compose.ui.unit.dp
 import com.example.newsapplicationcompose.presentation.components.NewsScaffold
 import com.example.newsapplicationcompose.presentation.rememberNewsAppState
 import com.example.newsapplicationcompose.ui.theme.NewsApplicationComposeTheme
+import com.example.newsapplicationcompose.viewmodel.NewsViewModel
 import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreenNavigationConfigurations() {
+fun MainScreenNavigationConfigurations(viewModel: NewsViewModel) {
     NewsApplicationComposeTheme {
         val appState = rememberNewsAppState()
         NewsScaffold(
@@ -39,7 +40,8 @@ fun MainScreenNavigationConfigurations() {
             NewsNavGraph(
                 modifier = Modifier.padding(innerPaddingModifier),
                 navHostController = appState.navController,
-                startDestination = BottomNavigationScreens.BreakingNewsScreen.route
+                startDestination = BottomNavigationScreens.BreakingNewsScreen.route,
+                viewModel = viewModel
             )
         }
     }
