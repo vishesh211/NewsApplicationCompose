@@ -6,12 +6,15 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.newsapplicationcompose.presentation.breakingnews.BreakingNewsScreen
+import com.example.newsapplicationcompose.viewmodel.NewsViewModel
 
 @Composable
 fun NewsNavGraph(
     navHostController: NavHostController,
     startDestination: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: NewsViewModel
 ) {
     NavHost(
         navController = navHostController,
