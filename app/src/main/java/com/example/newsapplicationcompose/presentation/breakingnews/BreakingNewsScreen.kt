@@ -10,7 +10,7 @@ import com.example.newsapplicationcompose.viewmodel.NewsViewModel
 fun BreakingNewsScreen(viewModel: NewsViewModel) {
     viewModel.getTopArticles()
     val topArticles = viewModel.topArticles.value
-    LazyColumn() {
+    LazyColumn {
         items(items = topArticles) {
             NewsItemCard(
                 newSource =
