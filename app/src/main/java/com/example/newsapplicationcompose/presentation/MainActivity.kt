@@ -22,17 +22,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             NewsApplicationComposeTheme {
                 // A surface container using the 'background' color from the theme
-                MainScreen()
+                MainScreen(viewModel)
             }
         }
     }
 }
 
 @Composable
-private fun MainScreen() {
+private fun MainScreen(viewModel: NewsViewModel) {
     val navController = rememberNavController()
 
-    MainScreenNavigationConfigurations()
+    MainScreenNavigationConfigurations(viewModel)
 }
 
 @Composable
