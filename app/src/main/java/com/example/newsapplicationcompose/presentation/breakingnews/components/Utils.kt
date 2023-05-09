@@ -14,6 +14,9 @@ import androidx.compose.ui.unit.dp
 fun NewsItemCard(
     onClick: () -> Unit,
     isBookMarked: Boolean,
+    newsSource: String,
+    newsHeadline: String,
+    datePublished: String,
     onToggleBookMark: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -30,7 +33,7 @@ fun NewsItemCard(
                 Spacer(modifier = Modifier.height(12.dp))
                 NewsHeadline()
                 Spacer(modifier = Modifier.height(12.dp))
-                NewsPublished()
+                DatePublished()
             }
         }
     }
